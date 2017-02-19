@@ -1,0 +1,33 @@
+body{
+	background-color: #0000FF;
+}
+#logo{
+	margin: auto;
+	width: 30%;
+	padding-top: 60px;
+	text-align: center;
+	color: white;
+}
+#logo img{
+	height: 40px;
+	display: inline;
+}
+#logo h1{
+	display: inline;
+}
+#loginForm{
+	border: solid 1px #E0E0E0;
+	width: 30%;
+	margin: 20px auto;
+	padding: 10px;
+	background-color: #F8F8F8;
+}
+.text{
+	background-color: #FFFFCC;
+}
+.submitBtn{
+	width: 100%;
+}
+.error{
+	color: red;
+}

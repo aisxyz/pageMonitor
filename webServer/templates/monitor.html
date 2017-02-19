@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+		{% block head %}
+		<title>网站篡改监测</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/monitor.css') }}">
+		{% endblock %}
+		
+		{% block bodyContent %}
+		<nav class="navbar navbar-inverse" role="navigation">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">
+						<img src="{{url_for('static', filename='images/logo.jpg')}}" 
+							class="img-circle" height="30px;">
+					</a>
+					<a class="navbar-brand" href="#">
+						<span class="glyphicon glyphicon-home"></span>&nbsp; 网站篡改监测
+					</a>
+				</div>
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="{{url_for('logout')}}">
+							<span class="glyphicon glyphicon-log-out"></span> 退出
+						</a>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-cog"></span> 设置
+							<b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a data-toggle="modal" href="#userConfig">修改密码</a></li>
+							<li><a data-toggle="modal" href="#monitorConfig">监测配置</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		
+		<div class="modal fade" id="userConfig" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title prompt">
+							修改密码
+						</h4>
+					</div>
+					<div class="modal-body">
+						<form class='form-horizontal myform' role="form" method="post" 
+								action="{{url_for('modifyPword')}}">
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="newPword">新密码：</label>
+								<div class="col-sm-10">
+									<input type="password" class="text form-control" name="newPword" id="newPword">
+								</div>
+							</div>
+							<div>
+								<button type="submit" class="btn btn-primary submitBtn">提交</button>
+							</div>
+						</form>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal -->
+		</div>
+		
+		<div class="modal fade" id="monitorConfig" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title prompt">
+							监测配置
+						</h4>
+					</div>
+					<div class="modal-body">
+						<form class='form-horizontal myform' role="form" 
+								action="{{url_for('monitorConfig')}}">
+							<div class="form-group">
+								<input class="text form-control" name="sitePath" 
+									placeholder="待监测网站所在路径">
+							</div>
+							<div class="form-group">
+								<input class="text form-control" name="backupPath" 
+									placeholder="备份网站所在路径">
+							</div>
+							<div class="form-group">
+								<input class="text form-control" name="receivers" 
+									placeholder="邮件接收者，指定多个时以空格隔开">
+							</div>
+							<div class="form-group">
+								<input class="text form-control" name="msgInterval" 
+									placeholder="相同邮件发送间隔时间，默认为30分钟">
+							</div>
+							<div class="checkbox">
+								<label>
+								  <input type="checkbox" name="autoRecover">尝试自动恢复
+								</label>
+							</div>
+							<div>
+								<button type="submit" class="btn btn-primary submitBtn">提交</button>
+							</div>
+						</form>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal -->
+		</div>
+		
+		<div class="launchTower">
+			<em></em>
+		</div>
+		{% endblock %}
