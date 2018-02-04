@@ -3,7 +3,6 @@ from time import asctime
 
 from core.dbHandler import DbHandler
 from utils.computeMd5 import compute_md5
-#from config import WEBSITE_PATH, WEBSITE_NAME
 
 def build_fingerprint_lib(website_path, website_name):
 	save_data_to_db = DbHandler(website_name).insert_to_collection
@@ -15,8 +14,9 @@ def build_fingerprint_lib(website_path, website_name):
 			mtime = os.path.getmtime(filepath)
 			with open(filepath, 'rb') as fd:
 				md5_value = compute_md5(fd.read())
+			filepath = filepath.replace('\\', '/')
 			doc = {'name': filepath, 'attr': [mtime, md5_value]}
 			documents.append(doc)
-		if documents:		# Each may be a director under the current director.
+		if documents:		# Each under the current director may be a director.
 			save_data_to_db(documents)
-	print("%s Successful create fingerprint database." %asctime())
+	print("%s Successful create fingerprint database for %s." %(asctime(), website_name))

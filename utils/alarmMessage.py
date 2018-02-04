@@ -6,7 +6,6 @@ g_smtp_host='smtp.exmail.qq.com'
 g_smtp_port = 25
 g_sender = 'keyongxing@hallowsec.com'
 g_password = 'keyxP@33'
-#g_receivers = ['1191182126@qq.com']
 
 def send_alarm_mail(receivers, subject, content):
 	message = MIMEText(content, 'plain', 'utf-8')

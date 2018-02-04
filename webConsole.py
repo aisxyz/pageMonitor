@@ -1,9 +1,9 @@
 #coding: utf8
 from utils.computeMd5 import compute_md5
+from webServer.views import app
+from webServer.usersDb import UsersDb
 
 def web_main():
-	from webServer.views import app
-	from webServer.usersDb import UsersDb
 	db = UsersDb()
 	if db.find_user('root') is None:		# Initial password.
 		db.add_user('root', compute_md5(b'root123'))

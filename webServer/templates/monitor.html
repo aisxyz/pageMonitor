@@ -2,6 +2,7 @@
 
 		{% block head %}
 		<title>网站篡改监测</title>
+		<link rel="stylesheet" href="http://static.runoob.com/assets/js/jquery-treeview/jquery.treeview.css"/>
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/monitor.css') }}">
 		{% endblock %}
 		
@@ -78,7 +79,7 @@
 						</h4>
 					</div>
 					<div class="modal-body">
-						<form class='form-horizontal myform' role="form" 
+						<form class='form-horizontal myform' role="form"
 								action="{{url_for('monitorConfig')}}">
 							<div class="form-group">
 								<input class="text form-control" name="sitePath" 
@@ -87,6 +88,10 @@
 							<div class="form-group">
 								<input class="text form-control" name="backupPath" 
 									placeholder="备份网站所在路径">
+							</div>
+							<div class="form-group">
+								<input class="text form-control" name="suffixType" 
+									placeholder="默认监测类型：.html .htm .asp .jpg .png .gif .php .jsp">
 							</div>
 							<div class="form-group">
 								<input class="text form-control" name="receivers" 
@@ -98,7 +103,7 @@
 							</div>
 							<div class="checkbox">
 								<label>
-								  <input type="checkbox" name="autoRecover">尝试自动恢复
+								  <input type="checkbox" name="autoRecover" checked>尝试自动恢复
 								</label>
 							</div>
 							<div>
@@ -110,7 +115,41 @@
 			</div><!-- /.modal -->
 		</div>
 		
-		<div class="launchTower">
-			<em></em>
-		</div>
+		<div id="showArea">
+			<div id="siteArea">
+				<div><h4>正在监测</h4></div>
+				{% if site %}
+				<div><button class="btn btn-default btn-link">{{site}}</button></div>
+				{% endif %}
+			</div>
+			
+			<div id='folderArea'>
+				<div class="launchTower">
+					<em></em>
+				</div>
+				
+				<div class='site'>
+					<b>* 选择/取消 监测网页</b><br>
+					{% if site %}
+					<form action='{{url_for("monitorPage")}}'>
+						<ul id="browser" class="filetree treeview-famfamfam">
+							{{folders|safe}}
+						</ul>
+						<br>
+						<strong>
+							<input type='checkbox' name='exit'> 退出监测
+						</strong><br>
+						<button type="submit" class="btn btn-primary">确认</button>
+					</form>
+					{% endif %}
+				</div>
+			</div>
+		<div>
+		{% endblock %}
+		
+		{% block extraJs %}
+		<script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+		<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="http://static.runoob.com/assets/js/jquery-treeview/jquery.treeview.js"></script>
+		<script src="{{ url_for('static', filename='js/toggle.js') }}"></script>
 		{% endblock %}
